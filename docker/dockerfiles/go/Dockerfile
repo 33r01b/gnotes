@@ -22,7 +22,7 @@ RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 \
     go build -o ./bin/app -v ./cmd/app/main.go
 
 # Stage 3. Run
-FROM scratch
+FROM alpine
 
 COPY --from=builder /etc/passwd /etc/passwd
 USER app
