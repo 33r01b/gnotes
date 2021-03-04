@@ -1,4 +1,4 @@
-package algorithms
+package search
 
 // BinarySearch return key of list by value
 func BinarySearch(list []int, item int) (mid int, ok bool) {
