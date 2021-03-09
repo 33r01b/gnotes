@@ -1,7 +1,7 @@
 package search
 
 // BreadthFirstSearch realization
-func BreadthFirstSearch(from *Node, graph *Graph, handler func(*Node) bool) (*Node, bool) {
+func BreadthFirstSearch(from *Node, graph *UnweightedGraph, handler func(*Node) bool) (*Node, bool) {
 	edges, ok := graph.Edges(from)
 	if !ok {
 		return nil, false

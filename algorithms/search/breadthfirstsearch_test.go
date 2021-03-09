@@ -10,7 +10,7 @@ func TestBreadFirstSearch(t *testing.T) {
 	claire := Node{name: "claire", profile: "developer"}
 	tom := Node{name: "tom", profile: "student"}
 
-	graph := NewGraph()
+	graph := NewUnweightedGraph()
 	graph.AddEdges(&you, []*Node{&alice, &claire, &bob})
 	graph.AddEdges(&alice, []*Node{&peggy})
 	graph.AddEdges(&claire, []*Node{&tom})
@@ -42,7 +42,7 @@ func TestBreadFirstSearchNotFound(t *testing.T) {
 	claire := Node{name: "claire", profile: "developer"}
 	tom := Node{name: "tom", profile: "student"}
 
-	graph := NewGraph()
+	graph := NewUnweightedGraph()
 	graph.AddEdges(&you, []*Node{&claire, &bob})
 	graph.AddEdges(&alice, []*Node{&peggy})
 	graph.AddEdges(&claire, []*Node{&tom})
