@@ -1,61 +1,64 @@
-package search
+package search_test
 
-import "testing"
+import (
+	"gnotes/algorithms/search"
+	"testing"
+)
 
 func TestBreadFirstSearch(t *testing.T) {
-	you := Node{name: "you", profile: "customer"}
-	alice := Node{name: "alice", profile: "designer"}
-	bob := Node{name: "bob", profile: "solder"}
-	peggy := Node{name: "peggy", profile: "mango_seller"}
-	claire := Node{name: "claire", profile: "developer"}
-	tom := Node{name: "tom", profile: "student"}
+	you := search.Node{Name: "you", Profile: "customer"}
+	alice := search.Node{Name: "alice", Profile: "designer"}
+	bob := search.Node{Name: "bob", Profile: "solder"}
+	peggy := search.Node{Name: "peggy", Profile: "mango_seller"}
+	claire := search.Node{Name: "claire", Profile: "developer"}
+	tom := search.Node{Name: "tom", Profile: "student"}
 
-	graph := NewUnweightedGraph()
-	graph.AddEdges(&you, []*Node{&alice, &claire, &bob})
-	graph.AddEdges(&alice, []*Node{&peggy})
-	graph.AddEdges(&claire, []*Node{&tom})
-	graph.AddEdges(&tom, []*Node{&peggy})
+	graph := search.NewUnweightedGraph()
+	graph.AddEdges(&you, []*search.Node{&alice, &claire, &bob})
+	graph.AddEdges(&alice, []*search.Node{&peggy})
+	graph.AddEdges(&claire, []*search.Node{&tom})
+	graph.AddEdges(&tom, []*search.Node{&peggy})
 
-	mangoSeller, ok := BreadthFirstSearch(
+	mangoSeller, ok := search.BreadthFirstSearch(
 		&you,
 		graph,
-		func(n *Node) bool {
-			return n.profile == "mango_seller"
+		func(n *search.Node) bool {
+			return n.Profile == "mango_seller"
 		},
 	)
 
 	if !ok {
-		t.Fatalf("Not found: %s", peggy.name)
+		t.Fatalf("Not found: %s", peggy.Name)
 	}
 
 	if *mangoSeller != peggy {
-		t.Fatalf("Wrong result: %s, must be %s", mangoSeller.name, peggy.name)
+		t.Fatalf("Wrong result: %s, must be %s", mangoSeller.Name, peggy.Name)
 	}
 
 }
 
 func TestBreadFirstSearchNotFound(t *testing.T) {
-	you := Node{name: "you", profile: "customer"}
-	alice := Node{name: "alice", profile: "designer"}
-	bob := Node{name: "bob", profile: "solder"}
-	peggy := Node{name: "peggy", profile: "mango_seller"}
-	claire := Node{name: "claire", profile: "developer"}
-	tom := Node{name: "tom", profile: "student"}
+	you := search.Node{Name: "you", Profile: "customer"}
+	alice := search.Node{Name: "alice", Profile: "designer"}
+	bob := search.Node{Name: "bob", Profile: "solder"}
+	peggy := search.Node{Name: "peggy", Profile: "mango_seller"}
+	claire := search.Node{Name: "claire", Profile: "developer"}
+	tom := search.Node{Name: "tom", Profile: "student"}
 
-	graph := NewUnweightedGraph()
-	graph.AddEdges(&you, []*Node{&claire, &bob})
-	graph.AddEdges(&alice, []*Node{&peggy})
-	graph.AddEdges(&claire, []*Node{&tom})
+	graph := search.NewUnweightedGraph()
+	graph.AddEdges(&you, []*search.Node{&claire, &bob})
+	graph.AddEdges(&alice, []*search.Node{&peggy})
+	graph.AddEdges(&claire, []*search.Node{&tom})
 
-	mangoSeller, ok := BreadthFirstSearch(
+	mangoSeller, ok := search.BreadthFirstSearch(
 		&you,
 		graph,
-		func(n *Node) bool {
-			return n.profile == "mango_seller"
+		func(n *search.Node) bool {
+			return n.Profile == "mango_seller"
 		},
 	)
 
 	if ok {
-		t.Fatalf("Result must be not found, get: %s", mangoSeller.name)
+		t.Fatalf("Result must be not found, get: %s", mangoSeller.Name)
 	}
 }

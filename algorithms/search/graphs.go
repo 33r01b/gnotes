@@ -1,5 +1,11 @@
 package search
 
+// Node is
+type Node struct {
+	Name    string
+	Profile string
+}
+
 // UnweightedGraph is
 type UnweightedGraph struct {
 	edges map[Node][]*Node
@@ -23,8 +29,7 @@ func (g *UnweightedGraph) Edges(n *Node) (edges []*Node, ok bool) {
 	return
 }
 
-// Node is
-type Node struct {
-	name    string
-	profile string
+// WeightedGraph is
+type WeightedGraph struct {
+	edges map[Node]map[Node]int
 }

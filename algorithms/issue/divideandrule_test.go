@@ -1,6 +1,7 @@
-package issue
+package issue_test
 
 import (
+	"gnotes/algorithms/issue"
 	"testing"
 )
 
@@ -8,7 +9,7 @@ func TestSum(t *testing.T) {
 	list := []int{1, 2, 3, 4, 5}
 	want := 15
 
-	result := Sum(list)
+	result := issue.Sum(list)
 
 	if result != want {
 		t.Fatalf("Wrong result %d, want %d", result, want)
@@ -19,7 +20,7 @@ func TestCount(t *testing.T) {
 	list := []int{1, 2, 3, 4, 5}
 	want := 5
 
-	result := Count(list)
+	result := issue.Count(list)
 
 	if result != want {
 		t.Fatalf("Wrong result %d, want %d", result, want)
@@ -30,7 +31,7 @@ func TestMax(t *testing.T) {
 	list := []int{1, 2, 3, 4, 5}
 	want := 5
 
-	result := Max(list)
+	result := issue.Max(list)
 
 	if result != want {
 		t.Fatalf("Wrong result %d, want %d", result, want)
@@ -74,7 +75,7 @@ func TestBinarySearch(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			result, ok := BinarySearch(list, tc.value)
+			result, ok := issue.BinarySearch(list, tc.value)
 
 			if result != tc.wantKey && ok {
 				t.Fatalf("Wrong result %d, want %d", result, tc.wantKey)
@@ -85,7 +86,7 @@ func TestBinarySearch(t *testing.T) {
 
 func TestBinarySearchNotFound(t *testing.T) {
 	list := []int{1, 2, 3, 4, 5, 6, 7, 8}
-	result, ok := BinarySearch(list, 10)
+	result, ok := issue.BinarySearch(list, 10)
 
 	if ok || result != 0 {
 		t.Fatalf("Wrong result, result must be not found, got %d", result)
