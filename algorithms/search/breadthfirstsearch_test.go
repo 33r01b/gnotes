@@ -11,10 +11,10 @@ func TestBreadFirstSearch(t *testing.T) {
 	tom := Node{name: "tom", profile: "student"}
 
 	graph := NewGraph()
-	graph.AddEdge(&you, []*Node{&alice, &claire, &bob})
-	graph.AddEdge(&alice, []*Node{&peggy})
-	graph.AddEdge(&claire, []*Node{&tom})
-	graph.AddEdge(&tom, []*Node{&peggy})
+	graph.AddEdges(&you, []*Node{&alice, &claire, &bob})
+	graph.AddEdges(&alice, []*Node{&peggy})
+	graph.AddEdges(&claire, []*Node{&tom})
+	graph.AddEdges(&tom, []*Node{&peggy})
 
 	mangoSeller, ok := BreadthFirstSearch(
 		&you,
@@ -43,9 +43,9 @@ func TestBreadFirstSearchNotFound(t *testing.T) {
 	tom := Node{name: "tom", profile: "student"}
 
 	graph := NewGraph()
-	graph.AddEdge(&you, []*Node{&claire, &bob})
-	graph.AddEdge(&alice, []*Node{&peggy})
-	graph.AddEdge(&claire, []*Node{&tom})
+	graph.AddEdges(&you, []*Node{&claire, &bob})
+	graph.AddEdges(&alice, []*Node{&peggy})
+	graph.AddEdges(&claire, []*Node{&tom})
 
 	mangoSeller, ok := BreadthFirstSearch(
 		&you,

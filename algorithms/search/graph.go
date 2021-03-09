@@ -12,9 +12,15 @@ func NewGraph() *Graph {
 	}
 }
 
-// AddEdge adds an edge to graph
-func (g *Graph) AddEdge(n *Node, nodes []*Node) {
+// AddEdges adds an edge to graph
+func (g *Graph) AddEdges(n *Node, nodes []*Node) {
 	g.edges[*n] = nodes
+}
+
+// Edges returns Node edges
+func (g *Graph) Edges(n *Node) (edges []*Node, ok bool) {
+	edges, ok = g.edges[*n]
+	return
 }
 
 // Node is
