@@ -4,7 +4,7 @@ import (
 	"math"
 )
 
-// DijkstraAlgorithm realization
+// DijkstraAlgorithm greedy algorithm
 func DijkstraAlgorithm(graph *WeightedGraph, from *Node, to *Node) (shortcut []*Node, cost int) {
 	costs := make(map[Node]int)
 	parents := make(map[Node]*Node)
