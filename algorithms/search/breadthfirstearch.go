@@ -1,6 +1,7 @@
 package search
 
 // BreadthFirstSearch greedy algorithm
+// O(v+e)
 func BreadthFirstSearch(from *Node, graph *UnweightedGraph, handler func(*Node) bool) (*Node, bool) {
 	edges, ok := graph.Edges(from)
 	if !ok {

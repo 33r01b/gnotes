@@ -5,6 +5,7 @@ import (
 )
 
 // DijkstraAlgorithm greedy algorithm
+// O(n^2)
 func DijkstraAlgorithm(graph *WeightedGraph, from *Node, to *Node) (shortcut []*Node, cost int) {
 	costs := make(map[Node]int)
 	parents := make(map[Node]*Node)
@@ -69,6 +70,7 @@ func DijkstraAlgorithm(graph *WeightedGraph, from *Node, to *Node) (shortcut []*
 	return
 }
 
+// O(n)
 func findLowestCostNode(costs map[Node]int, processed map[Node]bool) (lowestNode *Node) {
 	lowest := math.MaxInt64
 

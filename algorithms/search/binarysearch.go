@@ -1,6 +1,7 @@
 package search
 
 // BinarySearch return key of list by value
+// O(log n)
 func BinarySearch(list []int, item int) (mid int, ok bool) {
 	low := 0
 	high := len(list) - 1

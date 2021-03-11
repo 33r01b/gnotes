@@ -1,6 +1,7 @@
 package issue
 
 // SetCover greedy algorithm
+// O(n^2)
 func SetCover(statesNeed []string, stations map[string][]string) []string {
 	finalStations := make([]string, 0, len(statesNeed))
 
@@ -28,8 +29,9 @@ func SetCover(statesNeed []string, stations map[string][]string) []string {
 	return unique(finalStations)
 }
 
-func intersection(foo []string, bar []string) []string {
-	list := append(foo, bar...)
+// O(a+b)
+func intersection(a []string, b []string) []string {
+	list := append(a, b...)
 	i := make([]string, 0)
 	m := make(map[string]bool)
 
@@ -44,26 +46,27 @@ func intersection(foo []string, bar []string) []string {
 	return i
 }
 
-func difference(foo []string, bar []string) []string {
+// O(a+b)
+func difference(a []string, b []string) []string {
 	d := make([]string, 0)
 	m := make(map[string]bool)
 
-	for _, val := range bar {
+	for _, val := range b {
 		if _, ok := m[val]; !ok {
 			m[val] = true
 		}
 	}
 
-	for _, val := range foo {
+	for _, val := range a {
 		if _, ok := m[val]; !ok {
 			d = append(d, val)
 		}
 	}
 
 	return d
-
 }
 
+// O(n)
 func unique(input []string) []string {
 	u := make([]string, 0, len(input))
 	m := make(map[string]bool)

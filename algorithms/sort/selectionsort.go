@@ -1,6 +1,7 @@
 package sort
 
 // SelectionSort realization
+// O(n^2)
 func SelectionSort(list []int) []int {
 	newList := make([]int, len(list))
 
