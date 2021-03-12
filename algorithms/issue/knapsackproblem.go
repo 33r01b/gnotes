@@ -2,7 +2,7 @@ package issue
 
 import "math"
 
-type Knapsack struct {
+type Pack struct {
 	Capacity int
 	Sum      int
 	Items    []Item
@@ -15,20 +15,19 @@ type Item struct {
 }
 
 // KnapsackProblem dynamic algorithm realization
-func KnapsackProblem(knapsack *Knapsack, items []Item) {
-	// item -> capacity -> cost
-	table := map[int]map[int]Knapsack{}
+func KnapsackProblem(knapsack *Pack, items []Item) {
+	// item -> capacity -> Pack
+	table := map[int]map[int]Pack{}
 	minWeight := findMinWeight(items)
 
 	for i, item := range items {
+		if _, ok := table[i]; !ok {
+			table[i] = map[int]Pack{}
+		}
+
 		for j := minWeight; j <= knapsack.Capacity; j += minWeight {
-			if _, ok := table[i]; !ok {
-				table[i] = map[int]Knapsack{}
-				table[i][j] = Knapsack{
-					Capacity: 0,
-					Sum:      0,
-					Items:    make([]Item, 0),
-				}
+			if _, ok := table[i][j]; !ok {
+				table[i][j] = Pack{}
 			}
 
 			// filter oversize items
@@ -36,35 +35,34 @@ func KnapsackProblem(knapsack *Knapsack, items []Item) {
 				continue
 			}
 
-			var prevCost int
-			var prevItems []Item
-			cost := item.Cost
-			packItems := []Item{item}
+			// fill pack
+			pack := table[i][j]
+			pack.Sum = item.Cost
+			pack.Items = []Item{item}
 
-			// get previous item
+			// get previous pack
+			prevPack := Pack{}
 			if _, ok := table[i-1]; ok {
-				prevCost = table[i-1][j].Sum
-				prevItems = table[i-1][j].Items
+				prevPack = table[i-1][j]
 			}
 
-			if r, ok := table[i-1][j-item.Weight]; ok {
-				cost += r.Sum
-				packItems = append(packItems, r.Items...)
+			// fill with leftovers
+			if lo, ok := table[i-1][j-item.Weight]; ok {
+				pack.Sum += lo.Sum
+				pack.Items = append(pack.Items, lo.Items...)
 			}
 
-			if prevCost > cost {
-				cost = prevCost
-				packItems = prevItems
+			// if previous biggest, get them
+			if prevPack.Sum > pack.Sum {
+				pack.Sum = prevPack.Sum
+				pack.Items = prevPack.Items
 			}
 
-			subPack := table[i][j]
-			subPack.Sum = cost
-			subPack.Items = packItems
+			table[i][j] = pack
 
-			knapsack.Sum = cost
-			knapsack.Items = packItems
-
-			table[i][j] = subPack
+			// fill knapsack, last iteration result must be optimal
+			knapsack.Sum = pack.Sum
+			knapsack.Items = pack.Items
 		}
 	}
 

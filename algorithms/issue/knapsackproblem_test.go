@@ -30,7 +30,7 @@ func TestKnapsackProblem(t *testing.T) {
 	}
 
 	items := []issue.Item{player, notebook, guitar, phone}
-	knapsack := issue.Knapsack{Capacity: 4, Items: make([]issue.Item, 0)}
+	knapsack := issue.Pack{Capacity: 4, Items: make([]issue.Item, 0)}
 
 	issue.KnapsackProblem(&knapsack, items)
 	sort.Slice(knapsack.Items, func(i, j int) bool {
