@@ -27,6 +27,7 @@ func align(words []string, length int) string {
 
 	partLen := freeSpace / wordsLen
 	stringBuilder := strings.Builder{}
+	tailings := freeSpace - partLen*minSpaces
 
 	for i := range words {
 		stringBuilder.WriteString(words[i])
@@ -39,7 +40,7 @@ func align(words []string, length int) string {
 				stringBuilder.WriteString(strings.Repeat(" ", s))
 			}
 
-			if i < (freeSpace - (partLen * (wordsLen - 1))) {
+			if i < tailings {
 				stringBuilder.WriteString(" ")
 			}
 		}
