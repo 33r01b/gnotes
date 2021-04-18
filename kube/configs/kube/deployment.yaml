@@ -12,6 +12,10 @@ spec:
       labels:
         app: kube-go
     spec:
+      volumes:
+        - name: logs-storage
+          persistentVolumeClaim:
+            claimName: go-test-pvc
       containers:
         - name: kube-go
           image: 33r01b/gnotes-kube-config:latest
@@ -35,3 +39,6 @@ spec:
                 secretKeyRef:
                   name: app-secret
                   key: password
+          volumeMounts:
+            - mountPath: "/app/logs"
+              name: logs-storage
