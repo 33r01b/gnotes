@@ -1,0 +1,1 @@
+module "gnotes/kube/simple/app/foo"
