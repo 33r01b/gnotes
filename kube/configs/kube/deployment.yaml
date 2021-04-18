@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-go
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kube-go
+  template:
+    metadata:
+      labels:
+        app: kube-go
+    spec:
+      containers:
+        - name: kube-go
+          image: 33r01b/gnotes-kube-config:latest
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: "POD_IP"
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: "LOG_LEVEL"
+              value: "DEVELOPMENT"
+            - name: "APP_USER"
+              valueFrom:
+                configMapKeyRef:
+                  name: go-config
+                  key: APP_USER
+            - name: "APP_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: password
